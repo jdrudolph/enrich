@@ -46,9 +46,8 @@ def gene2go(filename, experimental=False, tax_id=9606, **kwds):
     :param experimental: use only experimentally validated annotations
     :param tax_id: filter according to taxon
     """
-    defaults = {'compression' : 'gzip',
-            'comment' : '#',
-            'names' : GENE2GO_COLUMNS }
+    defaults = {'comment': '#',
+                'names': GENE2GO_COLUMNS}
     defaults.update(kwds)
     result = pd.read_table(filename, **defaults)
     

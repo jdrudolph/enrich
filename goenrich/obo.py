@@ -44,7 +44,15 @@ _filename = 'db/go-basic.obo'
 
 def ontology(filename):
     O = nx.DiGraph()
-    with open(filename) as f:
+
+    if isinstance(filename, str):
+        f = open(filename)
+        we_opened_file = True
+    else:
+        f = filename
+        we_opened_file = False
+
+    try:
         tokens = _tokenize(f)
         terms = _filter_terms(tokens)
         entries = _parse_terms(terms)
@@ -53,6 +61,10 @@ def ontology(filename):
         O.add_edges_from(itertools.chain.from_iterable(edges))
         O.graph['roots'] = {data['name'] : n for n, data in O.node.items()
                 if data['name'] == data['namespace']}
+    finally:
+        if we_opened_file:
+            f.close()
+
     for root in O.graph['roots'].values():
         for n, depth in nx.shortest_path_length(O, root).items():
             node = O.node[n]
