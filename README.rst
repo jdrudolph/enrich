@@ -1,11 +1,11 @@
-goenrich README
-===============
+goenrich
+========
 
 .. image:: https://badges.gitter.im/Join%20Chat.svg
     :target: https://gitter.im/jdrudolph/goenrich?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 .. image:: https://readthedocs.org/projects/goenrich/badge/?version=latest
-    :target: https://goenrich.readthedocs.org/en/latest 
+    :target: https://goenrich.readthedocs.org/en/latest
 
 .. image:: https://travis-ci.org/jdrudolph/goenrich.svg?branch=master
     :target: https://travis-ci.org/jdrudolph/goenrich
@@ -22,8 +22,7 @@ Convenient GO enrichments from python. For use in ``python`` projects.
 Installation
 ------------
 
-| Install package from pypi and download ontology
-| and needed annotations.
+| Install package from pypi and download ontology and needed annotations.
 
 .. code:: shell
 
@@ -83,7 +82,7 @@ Generate ``png`` image using graphviz:
 or directly from python:
 
 .. code:: python
-  
+
   import subprocess
   subprocess.check_call(['dot', '-Tpng', 'example.dot', '-o', 'example.png'])
 
