@@ -29,6 +29,7 @@ class TestGoenrich(unittest.TestCase):
         query = gene2go['GeneID'].unique()[:20]
         df = goenrich.enrich.analyze(O, query, background_attribute)
         best_pval = float(df.dropna().sort_values('p').head(1).p)
+        print(best_pval)
         assert best_pval == float(9.155001707860028e-08)
 
 if __name__ == '__main__':
