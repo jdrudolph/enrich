@@ -1,6 +1,7 @@
 import unittest
 import subprocess
 import goenrich
+import networkx
 
 class TestGoenrich(unittest.TestCase):
 
