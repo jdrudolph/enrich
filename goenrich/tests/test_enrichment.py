@@ -1,9 +1,7 @@
-import pkg_resources
 import unittest
 import subprocess
 import goenrich
 import networkx
-import pandas as pd
 
 class TestGoenrich(unittest.TestCase):
 
