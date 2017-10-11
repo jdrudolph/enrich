@@ -39,7 +39,8 @@ def to_graphviz(G, gvfile, graph_label='', **kwargs):
         else:
             attr['color'] = 'black'
             attr['label'] = """{name}""".format(name=node['name'])
-        G.node[n] = attr
+        G.node[n].clear()
+        G.node[n].update(attr)
 
     A = nx.drawing.nx_agraph.to_agraph(G)
     A.graph_attr['label'] = graph_label

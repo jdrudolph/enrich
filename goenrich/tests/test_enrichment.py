@@ -1,7 +1,9 @@
+import pkg_resources
 import unittest
 import subprocess
 import goenrich
 import networkx
+import pandas as pd
 
 class TestGoenrich(unittest.TestCase):
 
@@ -14,12 +16,14 @@ class TestGoenrich(unittest.TestCase):
         query = gene2go['GeneID'].unique()[:20]
         try:
             import pygraphviz
-            goenrich.enrich.analyze(O, query, background_attribute, gvfile='test.dot')
+            df = goenrich.enrich.analyze(O, query, background_attribute, gvfile='test.dot')
             subprocess.check_call(['dot', '-Tpng', 'test.dot', '-o', 'test.png'])
             subprocess.check_call(['rm', 'test.dot', 'test.png'])
         except ImportError:
-            goenrich.enrich.analyze(O, query, background_attribute)
+            df = goenrich.enrich.analyze(O, query, background_attribute)
             print('pygraphviz could not be imported')
+        self.assertEqual(len(df.query('q<0.05')), 10)
+
 
     def test_pval_correctness(self):
         O = networkx.DiGraph()
