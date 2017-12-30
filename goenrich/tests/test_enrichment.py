@@ -20,7 +20,7 @@ class TestGoenrich(unittest.TestCase):
         except ImportError:
             df = goenrich.enrich.analyze(O, query, background_attribute)
             print('pygraphviz could not be imported')
-        self.assertEqual(len(df.query('q<0.05')), 10)
+        self.assertEqual(len(df.query('q<0.05')), 8)
 
 
     def test_pval_correctness(self):

@@ -45,10 +45,10 @@ def analyze(O, query, background_attribute, **kwargs):
                     'q' : q, 'n' : n, 'significant' : rej})
         goenrich.export.to_graphviz(G.reverse(copy=False), **options)
     return df
-    
+
 def propagate(O, values, attribute):
     """ Propagate values trough the hierarchy
-    
+
     >>> O = goenrich.obo.ontology('db/go-basic.obo')
     >>> gene2go = goenrich.read.gene2go('db/gene2go.gz')
     >>> values = {k: set(v) for k,v in gene2go.groupby('GO_ID')['GeneID']}
@@ -91,10 +91,11 @@ def calculate_pvalues(nodes, query, background_attribute, M,
         min_category_size=3, max_category_size=500,
         max_category_depth=5, **kwargs):
     """ calculate pvalues for all categories in the graph
-    
+
     :param G: ontology graph after background was set
     :param query: set of identifiers
     :param background_attribute: node attribute assoc. with the background set
+    :param M: total number of background ids
     :param min_category_size: categories smaller than this number are ignored
     :param max_category_size: categories larger than this number are ignored
     :returns: pvalues, x, n
@@ -111,13 +112,13 @@ def calculate_pvalues(nodes, query, background_attribute, M,
             or (n > max_category_size)):
             vals.append((float('NaN'), x, n))
         else:
-            vals.append((hypergeom.sf(x-1, M, n, N), x, n))
+            vals.append((hypergeom.sf(x-1, M, N, n), x, n))
     return zip(*vals)
 
 def multiple_testing_correction(ps, alpha=0.05,
         method='benjamini-hochberg', **kwargs):
     """ correct pvalues for multiple testing and add corrected `q` value
-    
+
     :param ps: list of pvalues
     :param alpha: significance level default : 0.05
     :param method: multiple testing correction method [bonferroni|benjamini-hochberg]
