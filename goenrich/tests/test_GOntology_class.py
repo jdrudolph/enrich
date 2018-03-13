@@ -7,6 +7,8 @@ class TestGOntology(unittest.TestCase):
 
     def test_creation(self):
         self.assertTrue('test_ontologies/goslim_generic.obo' in self.O.obofile)
+        e = self.O.graph.get_edge_data('GO:0000228', 'GO:0005634')
+        self.assertEqual(e['rel'], 'part_of')
 
     def test_get_term(self):
         t = self.O.get_term('GO:0003729')
