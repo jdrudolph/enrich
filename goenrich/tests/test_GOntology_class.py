@@ -3,7 +3,7 @@ from pkg_resources import resource_filename as pkg_file
 from goenrich.ontol import GOntology, GOTermNotFoundError
 
 class TestGOntology(unittest.TestCase):
-    O = GOntology(pkg_file(__name__, 'test_ontologies/goslim_generic.obo'))
+    O = GOntology.from_obo(pkg_file(__name__, 'test_ontologies/goslim_generic.obo'))
 
     def test_creation(self):
         self.assertTrue('test_ontologies/goslim_generic.obo' in self.O.obofile)

@@ -6,18 +6,6 @@ from goenrich.tools import fdrcorrection
 import goenrich.export
 
 def analyze(O, query, background_attribute, **kwargs):
-    """ run enrichment analysis for query
-
-    >>> O = goenrich.obo.ontology('db/go-basic.obo')
-    >>> gene2go = goenrich.read.gene2go('db/gene2go.gz')
-    >>> values = {k: set(v) for k,v in gene2go.groupby('GO_ID')['GeneID']}
-    >>> goenrich.enrich.propagate(O, values, 'gene2go')
-    >>> df = goenrich.enrich.analyze(O, query, ...)
-
-    :param O: Ontology graph after backgroud was set
-    :param query: array like of ids
-    :returns: pandas.DataFrame with results
-    """
     options = {
             'show' : 'top20'
     }
@@ -46,26 +34,6 @@ def analyze(O, query, background_attribute, **kwargs):
         goenrich.export.to_graphviz(G.reverse(copy=False), **options)
     return df
 
-def propagate(O, values, attribute):
-    """ Propagate values trough the hierarchy
-
-    >>> O = goenrich.obo.ontology('db/go-basic.obo')
-    >>> gene2go = goenrich.read.gene2go('db/gene2go.gz')
-    >>> values = {k: set(v) for k,v in gene2go.groupby('GO_ID')['GeneID']}
-    >>> goenrich.enrich.propagate(O, values, 'gene2go')
-
-    Uses topological sorting of the vertices. Since degrees are
-    usually low performance is almost linear time.
-
-    :param O: ontology graph
-    :param values: mapping of nodes to set of ids
-    :param attribute: name of the attribute
-    """
-    for n in nx.topological_sort(O):
-        current = O.node[n].setdefault(attribute, set())
-        current.update(values.get(n, set()))
-        for p in O[n]:
-            O.node[p].setdefault(attribute, set()).update(current)
 
 def induced_subgraph(O, terms):
     """  Extracts a subgraph from O including the provided terms
