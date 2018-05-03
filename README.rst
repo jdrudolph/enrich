@@ -27,6 +27,7 @@ Installation
 .. code:: shell
 
     pip install goenrich
+    # assuming in goenrich distribution root directory (containing setup.py file)
     mkdir db
     # Ontology
     wget http://purl.obolibrary.org/obo/go/go-basic.obo -O db/go-basic.obo
@@ -37,15 +38,40 @@ Installation
     # Entrez GeneID
     wget ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2go.gz -O db/gene2go.gz
 
-Run GO enrichment
------------------
+Usage
+-----
+
+Create and use the Ontology
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: python
 
   import goenrich
+  import goenrich.ontol
 
   # build the ontology
-  O = goenrich.obo.ontology('db/go-basic.obo')
+  O = goenrich.ontol.GOntology.from_obo('db/go-basic.obo')
+
+  # getting a term
+  t = O.get_term('GO:0003729')
+  # <GO:0003729 mRNA binding>
+
+  # getting GO term child terms
+  tt = O.get_child_terms(t) #or with Term ID O.get_child_terms('GO:0003729')
+  # [<GO:0003730 mRNA 3'-UTR binding>,
+  #  <GO:0030350 iron-responsive element binding> ...]
+
+  # search GO term by name
+  O.search_terms_by_name('translation factor activity')
+  # [<GO:0008135 translation factor activity, RNA binding>,
+  #  <GO:0045183 translation factor activity, non-nucleic acid binding>]
+
+See docs of :py:class:`~goenrich.ontol.GOntology` class for more goodies.
+
+Run GO enrichment
+^^^^^^^^^^^^^^^^^
+
+.. code:: python
 
   # use all entrez geneid associations form gene2go as background
   # use annot = goenrich.read.goa('db/gene_association.goa_human.gaf.gz') for uniprot
@@ -56,7 +82,7 @@ Run GO enrichment
 
   # propagate the background through the ontology
   background_attribute = 'gene2go'
-  goenrich.enrich.propagate(O, values, background_attribute)
+  O.propagate(values, background_attribute)
 
   # extract some list of entries as example query
   # use query = annot['db_object_symbol'].unique()[:20]
@@ -64,7 +90,7 @@ Run GO enrichment
 
   # for additional export to graphviz just specify the gvfile argument
   # the show argument keeps the graph reasonably small
-  df = goenrich.enrich.analyze(O, query, background_attribute, gvfile='test.dot')
+  df = O.get_enrichment(query, background_attribute, gvfile='test.dot')
 
   # generate html
   df.dropna().head().to_html('example.html')
@@ -102,7 +128,7 @@ Special thanks
 
 - `@lukauskas <https://github.com/lukauskas/>`_ for implementing i/o support for file-like objects.
 - `@zfrenchee <https://github.com/zfrenchee/>`_ for fixing a bug in the calculation of the test statistic.
-- `@pommy1 <https://github.com/pommy1/>`_ for implementing support for `networkx >= 2.0.0`.
+- `@mikpom <https://github.com/mikpom/>`_ for implementing support for `networkx >= 2.0.0`.
 
 Building the documentation
 ==========================
@@ -110,4 +136,4 @@ Building the documentation
 .. code:: shell
 
   sphinx-apidoc -f -o docs goenrich goenrich/tests
-
+  sphinx-build docs docs/_build

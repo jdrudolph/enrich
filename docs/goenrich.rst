@@ -28,10 +28,26 @@ goenrich.obo module
     :undoc-members:
     :show-inheritance:
 
+goenrich.ontol module
+---------------------
+
+.. automodule:: goenrich.ontol
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 goenrich.read module
 --------------------
 
 .. automodule:: goenrich.read
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+goenrich.tools module
+---------------------
+
+.. automodule:: goenrich.tools
     :members:
     :undoc-members:
     :show-inheritance:

@@ -142,24 +142,6 @@ created_by: kchris
 creation_date: 2010-08-10T04:03:22Z
 
 [Term]
-id: GO:0001071
-name: nucleic acid binding transcription factor activity
-namespace: molecular_function
-def: "Interacting selectively and non-covalently with a DNA or RNA sequence in order to modulate transcription. The transcription factor may or may not also interact selectively with a protein or macromolecular complex." [GOC:txnOH]
-comment: Note that this term is in the subset of terms that should not be used for direct gene product annotation. This term does not provide specificity with respect to the type of nucleic acid binding, e.g. RNA or DNA. Please use a child term that provides that specificity or, if no appropriate child term exists, please request a new term. Direct annotations to this term may be amended during annotation QC.
-subset: gocheck_do_not_manually_annotate
-subset: goslim_agr
-subset: goslim_chembl
-subset: goslim_generic
-subset: goslim_mouse
-subset: goslim_yeast
-synonym: "transcription factor activity" BROAD []
-is_a: GO:0003674 ! molecular_function
-relationship: part_of GO:0008150 ! biological_process
-created_by: kchris
-creation_date: 2010-10-21T04:37:54Z
-
-[Term]
 id: GO:0002376
 name: immune system process
 namespace: biological_process
@@ -221,6 +203,29 @@ synonym: "plasmid binding" NARROW []
 synonym: "structure specific DNA binding" RELATED []
 synonym: "structure-specific DNA binding" RELATED []
 is_a: GO:0003674 ! molecular_function
+
+[Term]
+id: GO:0003700
+name: DNA binding transcription factor activity
+namespace: molecular_function
+alt_id: GO:0000130
+alt_id: GO:0001071
+def: "Interacting selectively and non-covalently with a specific DNA sequence (sometimes referred to as a motif) within the regulatory region of a gene in order to modulate transcription." [GOC:curators, GOC:txnOH]
+subset: goslim_agr
+subset: goslim_chembl
+subset: goslim_generic
+subset: goslim_metagenomics
+subset: goslim_mouse
+subset: goslim_plant
+subset: goslim_yeast
+subset: gosubset_prok
+synonym: "nucleic acid binding transcription factor activity" NARROW []
+synonym: "sequence-specific DNA binding transcription factor activity" EXACT []
+synonym: "transcription factor activity" BROAD []
+is_a: GO:0003674 ! molecular_function
+relationship: part_of GO:0008150 ! biological_process
+created_by: kchris
+creation_date: 2010-10-21T04:37:54Z
 
 [Term]
 id: GO:0003723
@@ -828,6 +833,7 @@ subset: goslim_pir
 subset: goslim_plant
 subset: goslim_yeast
 synonym: "cell nucleus" EXACT []
+synonym: "horsetail nucleus" NARROW [GOC:al, GOC:mah, GOC:vw, PMID:15030757]
 xref: NIF_Subcellular:sao1702920020
 xref: Wikipedia:Cell_nucleus
 is_a: GO:0043226 ! organelle
@@ -1019,7 +1025,7 @@ synonym: "ER" EXACT []
 xref: NIF_Subcellular:sao1036339110
 xref: Wikipedia:Endoplasmic_reticulum
 is_a: GO:0043226 ! organelle
-relationship: part_of GO:0005622 ! intracellular
+relationship: part_of GO:0005737 ! cytoplasm
 
 [Term]
 id: GO:0005794
@@ -1042,7 +1048,6 @@ synonym: "Golgi ribbon" NARROW []
 xref: NIF_Subcellular:sao451912436
 xref: Wikipedia:Golgi_apparatus
 is_a: GO:0043226 ! organelle
-relationship: part_of GO:0005737 ! cytoplasm
 
 [Term]
 id: GO:0005811
@@ -1110,6 +1115,7 @@ synonym: "membrane bound ribosome" NARROW [NIF_Subcellular:sao1291545653]
 synonym: "ribosomal RNA" RELATED []
 xref: NIF_Subcellular:sao1429207766
 xref: Wikipedia:Ribosome
+is_a: GO:0032991 ! protein-containing complex
 is_a: GO:0043226 ! organelle
 relationship: part_of GO:0005737 ! cytoplasm
 
@@ -1179,7 +1185,7 @@ xref: FMA:67181
 xref: NIF_Subcellular:sao787716553
 xref: Wikipedia:Cilium
 is_a: GO:0043226 ! organelle
-relationship: has_part GO:0043234 ! protein complex
+relationship: has_part GO:0032991 ! protein-containing complex
 
 [Term]
 id: GO:0005975
@@ -1423,19 +1429,6 @@ xref: Wikipedia:Protein_folding
 is_a: GO:0008150 ! biological_process
 
 [Term]
-id: GO:0006461
-name: protein complex assembly
-namespace: biological_process
-def: "The aggregation, arrangement and bonding together of a set of components to form a protein complex." [GOC:ai]
-subset: goslim_chembl
-subset: goslim_generic
-subset: goslim_pombe
-subset: gosubset_prok
-synonym: "chaperone activity" RELATED []
-synonym: "protein complex formation" EXACT []
-is_a: GO:0065003 ! macromolecular complex assembly
-
-[Term]
 id: GO:0006464
 name: cellular protein modification process
 namespace: biological_process
@@ -1556,6 +1549,8 @@ alt_id: GO:0015457
 alt_id: GO:0015460
 alt_id: GO:0044765
 def: "The directed movement of substances (such as macromolecules, small molecules, ions) or cellular components (such as complexes and organelles) into, out of or within a cell, or between cells, or within a multicellular organism by means of some agent such as a transporter, pore or motor protein." [GOC:dos, GOC:dph, GOC:jl, GOC:mah]
+comment: Note that this term should not be used for direct annotation. It should be possible to make a more specific annotation to one of the children of this term, for e.g. to transmembrane transport, to microtubule-based transport or to vesicle-mediated transport.
+subset: gocheck_do_not_annotate
 subset: goslim_aspergillus
 subset: goslim_candida
 subset: goslim_chembl
@@ -1671,8 +1666,6 @@ def: "The directed movement of substances into, out of or within a vacuole." [GO
 subset: goslim_chembl
 subset: goslim_generic
 is_a: GO:0006810 ! transport
-relationship: occurs_in GO:0005622 ! intracellular
-relationship: part_of GO:0008150 ! biological_process
 
 [Term]
 id: GO:0007049
@@ -2023,6 +2016,7 @@ creation_date: 2012-10-17T15:52:35Z
 id: GO:0009058
 name: biosynthetic process
 namespace: biological_process
+alt_id: GO:0044711
 def: "The chemical reactions and pathways resulting in the formation of substances; typically the energy-requiring part of metabolism in which simpler substances are transformed into more complex ones." [GOC:curators, ISBN:0198547684]
 subset: goslim_chembl
 subset: goslim_generic
@@ -2031,7 +2025,8 @@ subset: goslim_plant
 subset: gosubset_prok
 synonym: "anabolism" EXACT []
 synonym: "biosynthesis" EXACT []
-synonym: "formation" EXACT []
+synonym: "formation" RELATED []
+synonym: "single-organism biosynthetic process" RELATED []
 synonym: "synthesis" EXACT []
 xref: Wikipedia:Anabolism
 is_a: GO:0008150 ! biological_process
@@ -3320,19 +3315,26 @@ subset: gosubset_prok
 synonym: "protein-RNA complex assembly" EXACT []
 synonym: "RNA-protein complex assembly" EXACT []
 synonym: "RNP complex assembly" EXACT []
-is_a: GO:0065003 ! macromolecular complex assembly
+is_a: GO:0065003 ! protein-containing complex assembly
 
 [Term]
 id: GO:0022857
 name: transmembrane transporter activity
 namespace: molecular_function
 alt_id: GO:0005386
+alt_id: GO:0015563
 alt_id: GO:0015646
-def: "Enables the transfer of a substance from one side of a membrane to the other." [GOC:mtg_transport, ISBN:0815340729]
+alt_id: GO:0022891
+alt_id: GO:0022892
+def: "Enables the transfer of a substance, usually a specific substance or a group of related substances, from one side of a membrane to the other." [GOC:jid, GOC:mtg_transport, ISBN:0815340729]
 subset: goslim_chembl
 subset: goslim_generic
 subset: goslim_yeast
 subset: gosubset_prok
+synonym: "substrate-specific transmembrane transporter activity" RELATED []
+synonym: "substrate-specific transporter activity" NARROW []
+synonym: "uptake permease activity" RELATED []
+synonym: "uptake transmembrane transporter activity" RELATED []
 xref: Reactome:REACT_100033 "GLUT9 transports glucose, fructose and urate, Gallus gallus"
 xref: Reactome:REACT_106735 "GLUT9 transports glucose, fructose and urate, Xenopus tropicalis"
 xref: Reactome:REACT_111088 "Egress of internalized antigen to the cytosol via sec61, Homo sapiens"
@@ -3511,6 +3513,25 @@ xref: Wikipedia:Transposon
 is_a: GO:0008150 ! biological_process
 
 [Term]
+id: GO:0032991
+name: protein-containing complex
+namespace: cellular_component
+alt_id: GO:0043234
+def: "A stable assembly of two or more macromolecules, i.e. proteins, nucleic acids, carbohydrates or lipids, in which at least one component is a protein and the constituent parts function together." [GOC:dos, GOC:mah]
+comment: A protein complex in this context is meant as a stable set of interacting proteins which can be co-purified by an acceptable method, and where the complex has been shown to exist as an isolated, functional unit in vivo. Acceptable experimental methods include stringent protein purification followed by detection of protein interaction. The following methods should be considered non-acceptable: simple immunoprecipitation, pull-down experiments from cell extracts without further purification, colocalization and 2-hybrid screening. Interactions that should not be captured as protein complexes include: 1) enzyme/substrate, receptor/ligand or any similar transient interactions, unless these are a critical part of the complex assembly or are required e.g. for the receptor to be functional; 2) proteins associated in a pull-down/co-immunoprecipitation assay with no functional link or any evidence that this is a defined biological entity rather than a loose-affinity complex; 3) any complex where the only evidence is based on genetic interaction data; 4) partial complexes, where some subunits (e.g. transmembrane ones) cannot be expressed as recombinant proteins and are excluded from experiments (in this case, independent evidence is necessary to find out the composition of the full complex, if known). Interactions that may be captured as protein complexes include: 1) enzyme/substrate or receptor/ligand if the complex can only assemble and become functional in the presence of both classes of subunits; 2) complexes where one of the members has not been shown to be physically linked to the other(s), but is a homologue of, and has the same functionality as, a protein that has been experimentally demonstrated to form a complex with the other member(s); 3) complexes whose existence is accepted based on localization and pharmacological studies, but for which experimental evidence is not yet available for the complex as a whole.
+subset: goslim_agr
+subset: goslim_chembl
+subset: goslim_generic
+subset: goslim_pir
+subset: gosubset_prok
+synonym: "macromolecular complex" EXACT []
+synonym: "macromolecule complex" EXACT []
+synonym: "protein complex" NARROW []
+synonym: "protein containing complex" EXACT []
+synonym: "protein-protein complex" NARROW []
+is_a: GO:0005575 ! cellular_component
+
+[Term]
 id: GO:0034330
 name: cell junction organization
 namespace: biological_process
@@ -3601,7 +3622,7 @@ id: GO:0042254
 name: ribosome biogenesis
 namespace: biological_process
 alt_id: GO:0007046
-def: "A cellular process that results in the biosynthesis of constituent macromolecules, assembly, and arrangement of constituent parts of ribosome subunits; includes transport to the sites of protein synthesis." [GOC:ma]
+def: "A cellular process that results in the biosynthesis of constituent macromolecules, assembly, and arrangement of constituent parts of ribosome subunits; includes transport to the sites of protein synthesis." [GOC:ma, PMID:26404467, Wikipedia:Ribosome_biogenesis]
 subset: goslim_aspergillus
 subset: goslim_candida
 subset: goslim_chembl
@@ -3609,9 +3630,7 @@ subset: goslim_generic
 subset: goslim_pir
 subset: goslim_pombe
 subset: gosubset_prok
-synonym: "ribosomal chaperone activity" RELATED []
 synonym: "ribosome biogenesis and assembly" EXACT []
-xref: Wikipedia:Ribosome_biogenesis
 is_a: GO:0008150 ! biological_process
 
 [Term]
@@ -3629,13 +3648,21 @@ is_a: GO:0003674 ! molecular_function
 id: GO:0042592
 name: homeostatic process
 namespace: biological_process
+alt_id: GO:0032844
+alt_id: GO:0032845
+alt_id: GO:0032846
 def: "Any biological process involved in the maintenance of an internal steady state." [GOC:jl, ISBN:0395825172]
 subset: goslim_agr
 subset: goslim_chembl
 subset: goslim_generic
 subset: goslim_mouse
 subset: gosubset_prok
-synonym: "homeostasis" RELATED []
+synonym: "activation of homeostatic process" NARROW []
+synonym: "homeostasis" EXACT []
+synonym: "inhibition of homeostatic process" NARROW []
+synonym: "negative regulation of homeostatic process" RELATED []
+synonym: "positive regulation of homeostatic process" RELATED []
+synonym: "regulation of homeostatic process" RELATED []
 is_a: GO:0008150 ! biological_process
 
 [Term]
@@ -3663,21 +3690,6 @@ subset: goslim_pir
 subset: gosubset_prok
 xref: NIF_Subcellular:sao1539965131
 xref: Wikipedia:Organelle
-is_a: GO:0005575 ! cellular_component
-
-[Term]
-id: GO:0043234
-name: protein complex
-namespace: cellular_component
-def: "A stable macromolecular complex composed (only) of two or more polypeptide subunits along with any covalently attached molecules (such as lipid anchors or oligosaccharide) or non-protein prosthetic groups (such as nucleotides or metal ions). Prosthetic group in this context refers to a tightly bound cofactor. The component polypeptide subunits may be identical." [GOC:go_curators, http://www.ebi.ac.uk/intact/complex/documentation/]
-comment: A protein complex in this context is meant as a stable set of interacting proteins which can be co-purified by an acceptable method, and where the complex has been shown to exist as an isolated, functional unit in vivo. Acceptable experimental methods include stringent protein purification followed by detection of protein interaction. The following methods should be considered non-acceptable: simple immunoprecipitation, pull-down experiments from cell extracts without further purification, colocalization and 2-hybrid screening. Interactions that should not be captured as protein complexes include: 1) enzyme/substrate, receptor/ligand or any similar transient interactions, unless these are a critical part of the complex assembly or are required e.g. for the receptor to be functional; 2) proteins associated in a pull-down/co-immunoprecipitation assay with no functional link or any evidence that this is a defined biological entity rather than a loose-affinity complex; 3) any complex where the only evidence is based on genetic interaction data; 4) partial complexes, where some subunits (e.g. transmembrane ones) cannot be expressed as recombinant proteins and are excluded from experiments (in this case, independent evidence is necessary to find out the composition of the full complex, if known). Interactions that may be captured as protein complexes include: 1) enzyme/substrate or receptor/ligand if the complex can only assemble and become functional in the presence of both classes of subunits; 2) complexes where one of the members has not been shown to be physically linked to the other(s), but is a homologue of, and has the same functionality as, a protein that has been experimentally demonstrated to form a complex with the other member(s); 3) complexes whose existence is accepted based on localization and pharmacological studies, but for which experimental evidence is not yet available for the complex as a whole.
-subset: goslim_agr
-subset: goslim_chembl
-subset: goslim_generic
-subset: goslim_pir
-subset: gosubset_prok
-synonym: "protein-protein complex" EXACT []
-xref: Wikipedia:Protein_complex
 is_a: GO:0005575 ! cellular_component
 
 [Term]
@@ -3729,22 +3741,26 @@ creation_date: 2010-01-26T12:05:20Z
 
 [Term]
 id: GO:0044403
-name: symbiosis, encompassing mutualism through parasitism
+name: symbiont process
 namespace: biological_process
 alt_id: GO:0043298
 alt_id: GO:0044404
-def: "An interaction between two organisms living together in more or less intimate association. Microscopic symbionts are often referred to as endosymbionts. The various forms of symbiosis include parasitism, in which the association is disadvantageous or destructive to one of the organisms; mutualism, in which the association is advantageous, or often necessary to one or both and not harmful to either; and commensalism, in which one member of the association benefits while the other is not affected. However, mutualism, parasitism, and commensalism are often not discrete categories of interactions and should rather be perceived as a continuum of interaction ranging from parasitism to mutualism. In fact, the direction of a symbiotic interaction can change during the lifetime of the symbionts due to developmental changes as well as changes in the biotic/abiotic environment in which the interaction occurs." [GOC:cc, http://www.free-definition.com]
-comment: Note that this term encompasses all symbiotic relationships between species along a continuum from mutualism through to parasitism, as outlined in the definition.
+alt_id: GO:0072519
+alt_id: GO:0085031
+def: "A process carried out by symbiont gene products that enables a symbiotic interaction with a host organism. The various forms of symbiosis include parasitism, in which the association is disadvantageous or destructive to one of the organisms; mutualism, in which the association is advantageous, or often necessary to one or both and not harmful to either; and commensalism, in which one member of the association benefits while the other is not affected. However, mutualism, parasitism, and commensalism are often not discrete categories of interactions and should rather be perceived as a continuum of interaction ranging from parasitism to mutualism. In fact, the direction of a symbiotic interaction can change during the lifetime of the symbionts due to developmental changes as well as changes in the biotic/abiotic environment in which the interaction occurs. Microscopic symbionts are often referred to as endosymbionts." [GOC:cc, https://study.com/academy/lesson/symbiont-definition-lesson-quiz.html]
+comment: Changed term, definition see https://github.com/geneontology/go-ontology/issues/14807
 subset: goslim_chembl
 subset: goslim_generic
 subset: gosubset_prok
-synonym: "host-pathogen interaction" RELATED []
-synonym: "symbiosis" EXACT []
-synonym: "symbiotic interaction" EXACT []
+synonym: "commensalism" NARROW []
+synonym: "host-pathogen interaction" NARROW []
+synonym: "parasitism" NARROW []
+synonym: "symbiosis" RELATED []
+synonym: "symbiosis, encompassing mutualism through parasitism" RELATED []
+synonym: "symbiotic interaction" RELATED []
 synonym: "symbiotic interaction between host and organism" RELATED []
-synonym: "symbiotic interaction between organisms" EXACT []
-synonym: "symbiotic interaction between species" EXACT []
-synonym: "symbiotic interaction with other non-host organism" RELATED []
+synonym: "symbiotic interaction between organisms" RELATED []
+synonym: "symbiotic interaction between species" RELATED []
 is_a: GO:0008150 ! biological_process
 
 [Term]
@@ -3879,7 +3895,7 @@ relationship: part_of GO:0008150 ! biological_process
 id: GO:0055085
 name: transmembrane transport
 namespace: biological_process
-def: "The process in which a solute is transported across a lipid bilayer, from one side of a membrane to the other" [GOC:dph, GOC:jid]
+def: "The process in which a solute is transported across a lipid bilayer, from one side of a membrane to the other." [GOC:dph, GOC:jid]
 comment: Transmembrane transport requires transport of a solute across a lipid bilayer. Note that transport through the nuclear pore complex is not transmembrane because the nuclear membrane is a double membrane and is not traversed. For transport through the nuclear pore, consider instead the term 'nucleocytoplasmic transport ; GO:0006913' and its children. Note also that this term is not intended for use in annotating lateral movement within membranes.
 subset: goslim_chembl
 subset: goslim_generic
@@ -3990,15 +4006,21 @@ creation_date: 2010-02-08T02:43:11Z
 
 [Term]
 id: GO:0065003
-name: macromolecular complex assembly
+name: protein-containing complex assembly
 namespace: biological_process
-def: "The aggregation, arrangement and bonding together of a set of macromolecules to form a complex." [GOC:jl]
+alt_id: GO:0006461
+def: "The aggregation, arrangement and bonding together of a set of macromolecules to form a protein-containing complex." [GOC:jl]
 subset: goslim_chembl
 subset: goslim_generic
 subset: goslim_metagenomics
 subset: goslim_pir
+subset: goslim_pombe
 subset: gosubset_prok
-synonym: "macromolecule complex assembly" EXACT []
+synonym: "chaperone activity" RELATED []
+synonym: "macromolecular complex assembly" RELATED []
+synonym: "macromolecule complex assembly" RELATED []
+synonym: "protein complex assembly" RELATED []
+synonym: "protein complex formation" RELATED []
 is_a: GO:0022607 ! cellular component assembly
 
 [Term]

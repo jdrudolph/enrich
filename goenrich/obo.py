@@ -19,7 +19,7 @@ def _parse_terms(terms):
     for term in terms:
         obsolete = False
         node = {}
-        parents = []
+        parents = {}
         for line in term:
             if line.startswith('id:'):
                 id = line[4:-1]
@@ -28,14 +28,14 @@ def _parse_terms(terms):
             elif line.startswith('namespace:'):
                 node['namespace'] = line[11:-1]
             elif line.startswith('is_a:'):
-                parents.append(line[6:16])
+                parents[line[6:16]] = 'is_a'
             elif line.startswith('relationship: part_of'):
-                parents.append(line[22:32])
+                parents[line[22:32]] = 'part_of'
             elif line.startswith('is_obsolete'):
                 obsolete = True
                 break
         if not obsolete:
-            edges = [(p, id) for p in parents] # will reverse edges later
+            edges = [(p, id, {'rel':r}) for p, r in parents.items()] # will reverse edges later
             yield (id, node), edges
         else:
             continue
