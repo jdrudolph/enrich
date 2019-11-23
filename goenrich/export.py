@@ -29,7 +29,7 @@ def to_graphviz(G, gvfile, graph_label='', **kwargs):
     :param graph_label: For empty label pass graph_label=''.
     """
     for n in G:
-        node = G.node[n]
+        node = G.nodes[n]
         attr = {}
         attr['shape'] = 'record'
         if not np.isnan(node.get('q', float('NaN'))):
@@ -39,8 +39,8 @@ def to_graphviz(G, gvfile, graph_label='', **kwargs):
         else:
             attr['color'] = 'black'
             attr['label'] = """{name}""".format(name=node['name'])
-        G.node[n].clear()
-        G.node[n].update(attr)
+        G.nodes[n].clear()
+        G.nodes[n].update(attr)
 
     A = nx.drawing.nx_agraph.to_agraph(G)
     A.graph_attr['label'] = graph_label
