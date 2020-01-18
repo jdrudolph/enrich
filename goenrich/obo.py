@@ -62,7 +62,7 @@ def ontology(file):
         nodes, edges = zip(*entries)
         O.add_nodes_from(nodes)
         O.add_edges_from(itertools.chain.from_iterable(edges))
-        O.graph['roots'] = {data['name'] : n for n, data in O.node.items()
+        O.graph['roots'] = {data['name'] : n for n, data in O.nodes.items()
                 if data['name'] == data['namespace']}
     finally:
         if we_opened_file:
@@ -70,6 +70,6 @@ def ontology(file):
 
     for root in O.graph['roots'].values():
         for n, depth in nx.shortest_path_length(O, root).items():
-            node = O.node[n]
+            node = O.nodes[n]
             node['depth'] = min(depth, node.get('depth', float('inf')))
     return O.reverse()

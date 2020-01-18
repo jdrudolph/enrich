@@ -47,7 +47,7 @@ def analyze(O, query, background_attribute, **kwargs):
         G = induced_subgraph(O, sig)
         for term, node, q, x, n, rej in zip(terms, nodes, qs, xs, ns, rejs):
             if term in G:
-                G.node[term].update({'name' : node['name'], 'x' : x,
+                G.nodes[term].update({'name' : node['name'], 'x' : x,
                     'q' : q, 'n' : n, 'significant' : rej})
         goenrich.export.to_graphviz(G.reverse(copy=False), **options)
     return df
@@ -114,10 +114,10 @@ def propagate(O, values, attribute):
     :param attribute: name of the attribute
     """
     for n in nx.topological_sort(O):
-        current = O.node[n].setdefault(attribute, set())
+        current = O.nodes[n].setdefault(attribute, set())
         current.update(values.get(n, set()))
         for p in O[n]:
-            O.node[p].setdefault(attribute, set()).update(current)
+            O.nodes[p].setdefault(attribute, set()).update(current)
 
 def induced_subgraph(O, terms):
     """  Extracts a subgraph from O including the provided terms

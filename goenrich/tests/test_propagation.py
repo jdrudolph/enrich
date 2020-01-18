@@ -28,10 +28,10 @@ class TestPropagationExample(unittest.TestCase):
         b = 'background'
         propagate(O, x, b)
 
-        self.assertSetEqual(O.node['c3'][b], c3)
-        self.assertSetEqual(O.node['c2'][b], c4 | c3 | c2)
-        self.assertSetEqual(O.node['c1'][b], c3 | c1)
-        self.assertSetEqual(O.node['r'][b], c4 | c3 | c2 | c1 | r)
+        self.assertSetEqual(O.nodes['c3'][b], c3)
+        self.assertSetEqual(O.nodes['c2'][b], c4 | c3 | c2)
+        self.assertSetEqual(O.nodes['c1'][b], c3 | c1)
+        self.assertSetEqual(O.nodes['r'][b], c4 | c3 | c2 | c1 | r)
 
 class TestPropagationReal(unittest.TestCase):
     def __init__(self, *args, **kwargs):
