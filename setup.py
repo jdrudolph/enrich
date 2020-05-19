@@ -7,7 +7,7 @@ def readme():
 setup(name='goenrich',
       version='1.11',
       description='GO enrichment with python -- pandas meets networkx',
-      long_description=readme(),
+      long_description="",
       classifiers=[
           'Development Status :: 4 - Beta',
           'Intended Audience :: Science/Research',
