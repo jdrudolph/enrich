@@ -1,9 +1,12 @@
 import random
-import networkx as nx
 import numpy as np
 from scipy.stats import hypergeom
-from goenrich.tools import fdrcorrection
+import networkx as nx
+nx_version = list(map(int, nx.__version__.split('.')))
+if nx_version[0] <= 2 and nx_version[1] < 4:
+    nx.Graph.node = nx.Graph.nodes
 
+from goenrich.tools import fdrcorrection
 import goenrich.export
 
 def analyze(O, query, background_attribute, **kwargs):
@@ -47,7 +50,7 @@ def analyze(O, query, background_attribute, **kwargs):
         G = induced_subgraph(O, sig)
         for term, node, q, x, n, rej in zip(terms, nodes, qs, xs, ns, rejs):
             if term in G:
-                G.nodes[term].update({'name' : node['name'], 'x' : x,
+                G.node[term].update({'name' : node['name'], 'x' : x,
                     'q' : q, 'n' : n, 'significant' : rej})
         goenrich.export.to_graphviz(G.reverse(copy=False), **options)
     return df
@@ -114,10 +117,10 @@ def propagate(O, values, attribute):
     :param attribute: name of the attribute
     """
     for n in nx.topological_sort(O):
-        current = O.nodes[n].setdefault(attribute, set())
+        current = O.node[n].setdefault(attribute, set())
         current.update(values.get(n, set()))
         for p in O[n]:
-            O.nodes[p].setdefault(attribute, set()).update(current)
+            O.node[p].setdefault(attribute, set()).update(current)
 
 def induced_subgraph(O, terms):
     """  Extracts a subgraph from O including the provided terms
