@@ -1,5 +1,8 @@
 import unittest
 import networkx as nx
+nx_version = list(map(int, nx.__version__.split('.')))
+if nx_version[0] >= 2 and nx_version[1] >= 4:
+    nx.Graph.node = nx.Graph.nodes
 import pandas as pd
 import goenrich
 from goenrich.enrich import propagate

@@ -3,10 +3,10 @@ import numpy as np
 from scipy.stats import hypergeom
 import networkx as nx
 nx_version = list(map(int, nx.__version__.split('.')))
-if nx_version[0] <= 2 and nx_version[1] < 4:
+if nx_version[0] >= 2 and nx_version[1] >= 4:
     nx.Graph.node = nx.Graph.nodes
-
 from goenrich.tools import fdrcorrection
+
 import goenrich.export
 
 def analyze(O, query, background_attribute, **kwargs):
