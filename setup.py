@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='goenrich',
-      version='1.11',
+      version='1.12',
       description='GO enrichment with python -- pandas meets networkx',
       long_description=readme(),
       classifiers=[
@@ -30,7 +30,7 @@ setup(name='goenrich',
           'numpy',
           'pandas >= 0.17.0',
           'scipy',
-          'networkx'],
+          'networkx >= 2.4'],
       test_suite='nose.collector',
       tests_require=['nose', 'setuptools'],
       zip_safe=False)
